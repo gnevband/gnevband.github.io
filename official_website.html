@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Г.Н.Е.В. — Официальный сайт рок-группы</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Permanent Marker & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0a0a0a',
+                        cardBg: '#141414',
+                        cardHover: '#1f1f1f',
+                        crimson: {
+                            DEFAULT: '#dc2626',
+                            bright: '#ef4444',
+                            glow: '#991b1b',
+                            dark: '#7f1d1d'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        rock: ['Permanent Marker', 'cursive']
+                    },
+                    boxShadow: {
+                        'crimson-glow': '0 0 25px rgba(220, 38, 38, 0.4)',
+                        'crimson-glow-lg': '0 0 50px rgba(239, 68, 68, 0.6)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #dc2626;
+        }
+
+        /* Subtle glowing background effect */
+        .bg-flame-gradient {
+            background: radial-gradient(circle at 50% 20%, rgba(185, 28, 28, 0.15) 0%, rgba(10, 10, 10, 1) 70%);
+        }
+
+        /* Glassmorphism Navigation */
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(220, 38, 38, 0.2);
+        }
+
+        /* Custom text glow */
+        .text-glow {
+            text-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-crimson selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- STICKY NAVIGATION HEADER WITH DROPDOWNS -->
+    <header class="sticky top-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- BRAND LOGO -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <span class="font-rock text-3xl sm:text-4xl text-white group-hover:text-crimson-bright transition-colors tracking-wider text-glow">
+                        Г.Н.Е.В.
+                    </span>
+                    <i class="fa-solid font-bold text-crimson text-xl group-hover:rotate-12 transition-transform"></i>
+                </a>
+
+                <!-- DESKTOP NAVIGATION -->
+                <nav class="hidden md:flex space-x-1 lg:space-x-4">
+                    
+                    <!-- MENU 1: О НАС -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all">
+                            О нас
+                            <i class="fa-solid fa-chevron-down text-xs text-crimson transition-transform group-hover:rotate-180"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-56 rounded-xl bg-cardBg border border-crimson/30 shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                            <a href="#about" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-book-skull mr-2 text-crimson"></i>История группы
+                            </a>
+                            <a href="#manifest" onclick="openModal('manifestModal')" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-scroll mr-2 text-crimson"></i>Манифест Г.Н.Е.В.
+                            </a>
+                            <a href="#gallery" onclick="openModal('galleryModal')" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-images mr-2 text-crimson"></i>Галерея
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- MENU 2: БИЛЕТЫ -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all">
+                            Билеты
+                            <i class="fa-solid fa-chevron-down text-xs text-crimson transition-transform group-hover:rotate-180"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-60 rounded-xl bg-cardBg border border-crimson/30 shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                            <a href="#tickets" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-ticket mr-2 text-crimson"></i>Ближайшие концерты
+                            </a>
+                            <a href="#tickets" onclick="buyTicket('VIP Пропуск на Первую Парту')" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-crown mr-2 text-crimson"></i>VIP Пропуск ("Первая парта")
+                            </a>
+                            <a href="#tickets" onclick="buyTicket('Набор: Мерч + Концерт')" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-shirt mr-2 text-crimson"></i>Мерч + Билет
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- MENU 3: СОСТАВ -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all">
+                            Состав
+                            <i class="fa-solid fa-chevron-down text-xs text-crimson transition-transform group-hover:rotate-180"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-64 rounded-xl bg-cardBg border border-crimson/30 shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                            <a href="#lineup" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-users mr-2 text-crimson"></i>Участники (Г-Н-Е-В)
+                            </a>
+                            <a href="#lineup" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-hat-wizard mr-2 text-crimson"></i>Наш Историк (Магистр)
+                            </a>
+                            <a href="#lineup" onclick="alertMsg('Техническая команда: Весь наш любимый класс, поддерживающий слэм на задних партиях!')" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-sliders mr-2 text-crimson"></i>Техническая команда
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- MENU 4: ТРЕКИ -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all">
+                            Треки
+                            <i class="fa-solid fa-chevron-down text-xs text-crimson transition-transform group-hover:rotate-180"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-56 rounded-xl bg-cardBg border border-crimson/30 shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                            <a href="#tracks" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-compact-disc mr-2 text-crimson"></i>Дискография
+                            </a>
+                            <a href="#tracks" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-fire mr-2 text-crimson"></i>Главные синглы
+                            </a>
+                            <a href="#tracks" onclick="openModal('lyricsModal')" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-crimson/20 hover:text-white transition-colors">
+                                <i class="fa-solid fa-file-lines mr-2 text-crimson"></i>Тексты песен
+                            </a>
+                        </div>
+                    </div>
+
+                </nav>
+
+                <!-- HEADER ACTION BUTTON -->
+                <div class="hidden sm:block">
+                    <a href="#tickets" class="bg-crimson hover:bg-crimson-bright text-white px-5 py-2.5 rounded-xl font-bold shadow-crimson-glow transition-all hover:scale-105 active:scale-95 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Тур Г.Н.Е.В.
+                    </a>
+                </div>
+
+                <!-- MOBILE MENU TOGGLE BUTTON -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="text-gray-300 hover:text-white p-2 rounded-lg focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MOBILE DROPDOWN MENU -->
+        <div id="mobileMenu" class="hidden md:hidden bg-cardBg border-b border-crimson/30 px-4 pt-2 pb-6 space-y-4">
+            
+            <!-- Mobile Item 1 -->
+            <div class="border-b border-gray-800 pb-2">
+                <button onclick="toggleMobileAccordion('acc-about')" class="w-full flex justify-between items-center py-2 text-lg font-bold text-gray-200">
+                    <span><i class="fa-solid fa-book-skull mr-2 text-crimson"></i>О нас</span>
+                    <i class="fa-solid fa-chevron-down text-sm"></i>
+                </button>
+                <div id="acc-about" class="hidden pl-4 space-y-2 mt-1">
+                    <a href="#about" class="block py-1 text-sm text-gray-400 hover:text-crimson-bright">История группы</a>
+                    <a href="#manifest" onclick="openModal('manifestModal')" class="block py-1 text-sm text-gray-400 hover:text-crimson-bright">Манифест Г.Н.Е.В.</a>
+                    <a href="#gallery" onclick="openModal('galleryModal')" class="block py-1 text-sm text-gray-400 hover:text-crimson-bright">Галерея</a>
+                </div>
+            </div>
+
+            <!-- Mobile Item 2 -->
+            <div class="border-b border-gray-800 pb-2">
+                <button onclick="toggleMobileAccordion('acc-tickets')" class="w-full flex justify-between items-center py-2 text-lg font-bold text-gray-200">
+                    <span><i class="fa-solid fa-ticket mr-2 text-crimson"></i>Билеты</span>
+                    <i class="fa-solid fa-chevron-down text-sm"></i>
+                </button>
+                <div id="acc-tickets" class="hidden pl-4 space-y-2 mt-1">
+                    <a href="#tickets" class="block py-1 text-sm text-gray-400 hover:text-crimson-bright">Ближайшие концерты</a>
+                    <a href="#tickets" onclick="buyTicket('VIP Пропуск')" class="block py-1 text-sm text-gray-400 hover:text-crimson-bright">VIP Пропуск</a>
+                    <a href="#tickets" onclick="buyTicket('Мерч + Билет')" class="block py-1 text-sm text-gray-400 hover:text-crimson-bright">Мерч + Билет</a>
+                </div>
+            </div>
+
+            <!-- Mobile Item 3 -->
+            <div class="border-b border-gray-800 pb-2">
+                <button onclick="toggleMobileAccordion('acc-lineup')" class="w-full flex justify-between items-center py-2 text-lg font-bold text-gray-200">
+                    <span><i class="fa-solid fa-users mr-2 text-crimson"></i>Состав</span>
+                    <i class="fa-solid fa-chevron-down text-sm"></i>
+                </button>
+                <div id="acc-lineup" class="hidden pl-4 space-y-2 mt-1">
+                    <a href="#lineup" class="block py-1 text-sm text-gray-400 hover:text-crimson-bright">Участники (Г-Н-Е-В)</a>
+                    <a href="#lineup" class="block py-1 text-sm text-gray-400 hover:text-crimson-bright">Наш Историк (Магистр)</a>
+                </div>
+            </div>
+
+            <!-- Mobile Item 4 -->
+            <div class="pb-2">
+                <button onclick="toggleMobileAccordion('acc-tracks')" class="w-full flex justify-between items-center py-2 text-lg font-bold text-gray-200">
+                    <span><i class="fa-solid fa-compact-disc mr-2 text-crimson"></i>Треки</span>
+                    <i class="fa-solid fa-chevron-down text-sm"></i>
+                </button>
+                <div id="acc-tracks" class="hidden pl-4 space-y-2 mt-1">
+                    <a href="#tracks" class="block py-1 text-sm text-gray-400 hover:text-crimson-bright">Дискография</a>
+                    <a href="#tracks" class="block py-1 text-sm text-gray-400 hover:text-crimson-bright">Синглы</a>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[85vh] flex items-center justify-center bg-flame-gradient overflow-hidden px-4 py-20">
+        <!-- Background Decorative Elements -->
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-crimson/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-crimson/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto text-center z-10 space-y-8">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-crimson/10 border border-crimson/30 text-crimson-bright text-xs sm:text-sm font-semibold tracking-wider uppercase mb-2">
+                <i class="fa-solid fa-fire animate-pulse"></i> Легендарный школьный метал-проект
+            </div>
+            
+            <h1 class="font-rock text-6xl sm:text-8xl md:text-9xl text-white tracking-widest text-glow drop-shadow-2xl">
+                Г.Н.Е.В.
+            </h1>
+
+            <p class="text-gray-300 text-lg sm:text-2xl max-w-2xl mx-auto font-light leading-relaxed">
+                Громче звонка. Эпичнее любой контрольной. Рождённые на уроках истории под предводительством Нашего Историка.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <a href="#tickets" class="w-full sm:w-auto bg-crimson hover:bg-crimson-bright text-white px-8 py-4 rounded-xl font-extrabold text-lg shadow-crimson-glow transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-ticket"></i> Купить билеты
+                </a>
+                <a href="#tracks" class="w-full sm:w-auto bg-cardBg hover:bg-cardHover border border-gray-700 hover:border-crimson text-gray-200 px-8 py-4 rounded-xl font-bold text-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-compact-disc text-crimson"></i> Смотреть дискографию
+                </a>
+            </div>
+
+            <!-- Quick Stat Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 border-t border-gray-800/80 max-w-3xl mx-auto">
+                <div>
+                    <div class="text-3xl font-black text-white font-rock">100%</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider">Исторический драйв</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-black text-white font-rock">5/5</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider">Оценка в журнале</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-black text-white font-rock">4</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider">Столпа аббревиатуры</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-black text-white font-rock">∞</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider">Уважение Историку</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 px-4 bg-darkBg border-t border-gray-900 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 space-y-3">
+                <h2 class="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+                    История <span class="text-crimson font-rock">Легенды</span>
+                </h2>
+                <div class="w-24 h-1 bg-crimson mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-gray-300 leading-relaxed text-lg">
+                    <p class="first-letter:text-5xl first-letter:font-rock first-letter:text-crimson first-letter:float-left first-letter:mr-3">
+                        Все началось на обычном уроке истории. Когда темы параграфов стали слишком суровыми, а фамилии четырех главных активистов класса сложились в фатальную и пафосную аббревиатуру — рожден был **Г.Н.Е.В.**.
+                    </p>
+                    <p>
+                        Наш учитель истории не просто принял этот мем, он стал нашим главным вдохновителем и верховным магистром. Теперь каждое историческое событие от Древнего Рима до Новейшего времени обретает звучание гитарных риффов и оглушительных барабанов.
+                    </p>
+                    <div class="p-4 rounded-xl bg-cardBg border-l-4 border-crimson italic text-gray-400">
+                        "Кто не знает истории своей группы — обречен пересдавать её на осенней пересдаче!"
+                        <span class="block text-right font-bold text-crimson-bright mt-2">— Магистр Истории</span>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-crimson to-red-900 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
+                    <div class="relative rounded-2xl bg-cardBg border border-gray-800 p-8 space-y-6 text-center">
+                        <i class="fa-solid fa-drum-steelpan text-6xl text-crimson"></i>
+                        <h3 class="text-2xl font-bold text-white">Кодекс Г.Н.Е.В.а</h3>
+                        <ul class="text-left space-y-3 text-sm text-gray-300">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-crimson"></i> Никаких сдач без боя и тишины на задних партах.
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-crimson"></i> Историк всегда прав. Если не прав — смотри пункт 1.
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-check text-crimson"></i> Каждая пятерка в журнале прибавляет +10 к мощности соло.
+                            </li>
+                        </ul>
+                        <button onclick="openModal('manifestModal')" class="w-full bg-crimson/20 hover:bg-crimson text-crimson-bright hover:text-white border border-crimson/50 py-2.5 rounded-lg font-bold transition-all">
+                            Читать полный Манифест
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LINEUP / SOSTAV SECTION -->
+    <section id="lineup" class="py-20 px-4 bg-[#0d0d0d] border-t border-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 space-y-3">
+                <h2 class="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+                    Боевой <span class="text-crimson font-rock">Состав</span>
+                </h2>
+                <p class="text-gray-400 text-base max-w-xl mx-auto">Четыре столпа аббревиатуры и наш бессменный исторический наставник</p>
+                <div class="w-24 h-1 bg-crimson mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Member Cards Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                
+                <!-- G Card -->
+                <div class="bg-cardBg rounded-2xl p-6 border border-gray-800 hover:border-crimson transition-all duration-300 hover:-translate-y-2 group shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 rounded-xl bg-crimson/10 border border-crimson/40 flex items-center justify-center font-rock text-3xl text-crimson group-hover:scale-110 transition-transform mb-4">
+                            Г
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">Г— Участник</h3>
+                        <p class="text-xs text-crimson-bright font-semibold uppercase tracking-wider mb-3">Соло-гитара / Фамилия #1</p>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Мастер сокрушительных риффов и молниеносных ответов у доски.
+                        </p>
+                    </div>
+                    <span class="text-xs bg-black/40 px-3 py-1.5 rounded-lg border border-gray-800 text-gray-400 text-center">
+                        Спецспособность: Гитарное соло
+                    </span>
+                </div>
+
+                <!-- N Card -->
+                <div class="bg-cardBg rounded-2xl p-6 border border-gray-800 hover:border-crimson transition-all duration-300 hover:-translate-y-2 group shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 rounded-xl bg-crimson/10 border border-crimson/40 flex items-center justify-center font-rock text-3xl text-crimson group-hover:scale-110 transition-transform mb-4">
+                            Н
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">Н — Участник</h3>
+                        <p class="text-xs text-crimson-bright font-semibold uppercase tracking-wider mb-3">Бас-гитара / Фамилия #2</p>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Держит низкие частоты и стабильный балл по историческим датам.
+                        </p>
+                    </div>
+                    <span class="text-xs bg-black/40 px-3 py-1.5 rounded-lg border border-gray-800 text-gray-400 text-center">
+                        Спецспособность: Непробиваемый басс
+                    </span>
+                </div>
+
+                <!-- E Card -->
+                <div class="bg-cardBg rounded-2xl p-6 border border-gray-800 hover:border-crimson transition-all duration-300 hover:-translate-y-2 group shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 rounded-xl bg-crimson/10 border border-crimson/40 flex items-center justify-center font-rock text-3xl text-crimson group-hover:scale-110 transition-transform mb-4">
+                            Е
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">Е — Участник</h3>
+                        <p class="text-xs text-crimson-bright font-semibold uppercase tracking-wider mb-3">Вокал / Фамилия #3</p>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Голос группы. Способен перекричать школьный звонок на перемену.
+                        </p>
+                    </div>
+                    <span class="text-xs bg-black/40 px-3 py-1.5 rounded-lg border border-gray-800 text-gray-400 text-center">
+                        Спецспособность: Экстрим-вокал
+                    </span>
+                </div>
+
+                <!-- V Card -->
+                <div class="bg-cardBg rounded-2xl p-6 border border-gray-800 hover:border-crimson transition-all duration-300 hover:-translate-y-2 group shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 rounded-xl bg-crimson/10 border border-crimson/40 flex items-center justify-center font-rock text-3xl text-crimson group-hover:scale-110 transition-transform mb-4">
+                            В
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">В — Участник</h3>
+                        <p class="text-xs text-crimson-bright font-semibold uppercase tracking-wider mb-3">Ударные / Фамилия #4</p>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Задает ритм всему классу. Отстукивает кардан быстрее, чем идёт урок.
+                        </p>
+                    </div>
+                    <span class="text-xs bg-black/40 px-3 py-1.5 rounded-lg border border-gray-800 text-gray-400 text-center">
+                        Спецспособность: Двойная бочка
+                    </span>
+                </div>
+
+                <!-- HISTORY TEACHER CARD -->
+                <div class="bg-gradient-to-b from-crimson/20 to-cardBg rounded-2xl p-6 border-2 border-crimson hover:border-crimson-bright transition-all duration-300 hover:-translate-y-2 group shadow-crimson-glow flex flex-col justify-between sm:col-span-2 lg:col-span-1">
+                    <div>
+                        <div class="w-16 h-16 rounded-xl bg-crimson text-white flex items-center justify-center text-3xl group-hover:scale-110 transition-transform mb-4 shadow-lg">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">Наш Историк</h3>
+                        <p class="text-xs text-crimson-bright font-bold uppercase tracking-wider mb-3">Верховный Магистр / Продюсер</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Главный вдохновитель. Повелитель архивных хроник и хедлайнер школьной сцены.
+                        </p>
+                    </div>
+                    <span class="text-xs bg-crimson/30 px-3 py-1.5 rounded-lg border border-crimson text-white font-bold text-center">
+                        Статус: Наставник Г.Н.Е.В.а
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TRACKS & AUDIO PLAYER SECTION -->
+    <section id="tracks" class="py-20 px-4 bg-darkBg border-t border-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 space-y-3">
+                <h2 class="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+                    Дискография & <span class="text-crimson font-rock">Треки</span>
+                </h2>
+                <p class="text-gray-400 text-base">Слушай главные хиты, рожденные в стенах кабинета истории</p>
+                <div class="w-24 h-1 bg-crimson mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                
+                <!-- Interactive Track List (Left Column) -->
+                <div class="lg:col-span-2 space-y-3">
+                    
+                    <!-- Track 1 -->
+                    <div class="bg-cardBg hover:bg-cardHover border border-gray-800 hover:border-crimson/50 rounded-xl p-4 flex items-center justify-between transition-all group">
+                        <div class="flex items-center gap-4">
+                            <button onclick="playTrack('Звонок для учителя', 'Альбом: Параграф №1', '03:45')" class="w-12 h-12 rounded-lg bg-crimson/10 border border-crimson/30 group-hover:bg-crimson text-crimson group-hover:text-white flex items-center justify-center transition-all">
+                                <i class="fa-solid fa-play"></i>
+                            </button>
+                            <div>
+                                <h4 class="font-bold text-white text-base sm:text-lg">Звонок для учителя</h4>
+                                <p class="text-xs text-gray-400">Альбом: Параграф №1 • 03:45</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="hidden sm:inline-block text-xs bg-crimson/20 text-crimson-bright px-2.5 py-1 rounded-full font-semibold">Хит</span>
+                            <button onclick="openModal('lyricsModal')" class="text-gray-400 hover:text-white text-sm p-2">
+                                <i class="fa-solid fa-file-lines"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Track 2 -->
+                    <div class="bg-cardBg hover:bg-cardHover border border-gray-800 hover:border-crimson/50 rounded-xl p-4 flex items-center justify-between transition-all group">
+                        <div class="flex items-center gap-4">
+                            <button onclick="playTrack('Древний Рим в огне', 'Альбом: Античный слэм', '04:12')" class="w-12 h-12 rounded-lg bg-crimson/10 border border-crimson/30 group-hover:bg-crimson text-crimson group-hover:text-white flex items-center justify-center transition-all">
+                                <i class="fa-solid fa-play"></i>
+                            </button>
+                            <div>
+                                <h4 class="font-bold text-white text-base sm:text-lg">Древний Рим в огне</h4>
+                                <p class="text-xs text-gray-400">Альбом: Античный слэм • 04:12</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+    <!-- TRACKS SECTION -->
+    <section id="tracks" class="py-20 px-4 bg-darkBg border-t border-gray-900">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 space-y-3">
+                <h2 class="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+                    Дискография & <span class="text-crimson font-rock">Треки</span>
+                </h2>
+                <p class="text-gray-400 text-base">Главные хиты, рожденные в стенах кабинета истории</p>
+                <div class="w-24 h-1 bg-crimson mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Track List without Audio Player -->
+            <div class="space-y-4">
+                
+                <!-- Track 1 -->
+                <div class="bg-cardBg hover:bg-cardHover border border-gray-800 hover:border-crimson/50 rounded-xl p-5 flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-crimson/10 border border-crimson/30 text-crimson flex items-center justify-center text-xl font-rock">
+                            01
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-base sm:text-lg">Звонок для учителя</h4>
+                            <p class="text-xs text-gray-400">Альбом: Параграф №1 • 03:45</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="hidden sm:inline-block text-xs bg-crimson/20 text-crimson-bright px-3 py-1 rounded-full font-semibold">Хит</span>
+                        <button onclick="openModal('lyricsModal')" class="bg-cardBg hover:bg-crimson/20 border border-gray-700 hover:border-crimson text-gray-300 hover:text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-file-lines text-crimson"></i> Текст песни
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 2 -->
+                <div class="bg-cardBg hover:bg-cardHover border border-gray-800 hover:border-crimson/50 rounded-xl p-5 flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-crimson/10 border border-crimson/30 text-crimson flex items-center justify-center text-xl font-rock">
+                            02
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-base sm:text-lg">Древний Рим в огне</h4>
+                            <p class="text-xs text-gray-400">Альбом: Античный слэм • 04:12</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="openModal('lyricsModal')" class="bg-cardBg hover:bg-crimson/20 border border-gray-700 hover:border-crimson text-gray-300 hover:text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-file-lines text-crimson"></i> Текст песни
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 3 -->
+                <div class="bg-cardBg hover:bg-cardHover border border-gray-800 hover:border-crimson/50 rounded-xl p-5 flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-crimson/10 border border-crimson/30 text-crimson flex items-center justify-center text-xl font-rock">
+                            03
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-base sm:text-lg">Контрольный Г.Н.Е.В.</h4>
+                            <p class="text-xs text-gray-400">Сингл 2026 • 02:58</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="hidden sm:inline-block text-xs bg-gray-800 text-gray-300 px-3 py-1 rounded-full font-semibold">Новое</span>
+                        <button onclick="openModal('lyricsModal')" class="bg-cardBg hover:bg-crimson/20 border border-gray-700 hover:border-crimson text-gray-300 hover:text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-file-lines text-crimson"></i> Текст песни
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Track 4 -->
+                <div class="bg-cardBg hover:bg-cardHover border border-gray-800 hover:border-crimson/50 rounded-xl p-5 flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-crimson/10 border border-crimson/30 text-crimson flex items-center justify-center text-xl font-rock">
+                            04
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-base sm:text-lg">Вопросы по карте (Демо)</h4>
+                            <p class="text-xs text-gray-400">Секретный архив • 05:01</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="openModal('lyricsModal')" class="bg-cardBg hover:bg-crimson/20 border border-gray-700 hover:border-crimson text-gray-300 hover:text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-file-lines text-crimson"></i> Текст песни
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TICKETS / CONCERTS SECTION -->
+    <section id="tickets" class="py-20 px-4 bg-[#0d0d0d] border-t border-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 space-y-3">
+                <h2 class="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+                    Ближайшие <span class="text-crimson font-rock">Концерты</span>
+                </h2>
+                <p class="text-gray-400 text-base">Школьный тур "Великое Переселение Слэма"</p>
+                <div class="w-24 h-1 bg-crimson mx-auto rounded-full"></div>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- Tour Date 1 -->
+                <div class="bg-cardBg hover:bg-cardHover border border-gray-800 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 transition-all">
+                    <div class="flex items-center gap-6 w-full md:w-auto">
+                        <div class="bg-crimson/10 border border-crimson/30 rounded-xl px-4 py-3 text-center min-w-[90px]">
+                            <span class="block text-2xl font-black text-crimson-bright font-rock">25 МАР</span>
+                            <span class="text-xs text-gray-400 font-bold uppercase">Пятница</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Большой Актовый Зал</h3>
+                            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot text-crimson mr-1"></i> Главная сцена школы • 15:00</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between w-full md:w-auto gap-4">
+                        <span class="text-sm text-gray-400">Осталось мест: <strong class="text-white">12</strong></span>
+                        <button onclick="buyTicket('Концерт в Актовом Зале (25 Марта)')" class="bg-crimson hover:bg-crimson-bright text-white px-6 py-3 rounded-xl font-bold transition-all shadow-crimson-glow">
+                            Купить билет
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tour Date 2 -->
+                <div class="bg-cardBg hover:bg-cardHover border border-gray-800 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 transition-all">
+                    <div class="flex items-center gap-6 w-full md:w-auto">
+                        <div class="bg-crimson/10 border border-crimson/30 rounded-xl px-4 py-3 text-center min-w-[90px]">
+                            <span class="block text-2xl font-black text-crimson-bright font-rock">12 МАЯ</span>
+                            <span class="text-xs text-gray-400 font-bold uppercase">Четверг</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Кабинет История №304</h3>
+                            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot text-crimson mr-1"></i> Камерный акустический сет • 13:20</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between w-full md:w-auto gap-4">
+                        <span class="text-sm text-gray-400">Осталось мест: <strong class="text-white">5 (Первая парта)</strong></span>
+                        <button onclick="buyTicket('Акустика в Кабинете №304 (12 Мая)')" class="bg-crimson hover:bg-crimson-bright text-white px-6 py-3 rounded-xl font-bold transition-all shadow-crimson-glow">
+                            Купить билет
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tour Date 3 -->
+                <div class="bg-cardBg hover:bg-cardHover border border-gray-800 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 transition-all">
+                    <div class="flex items-center gap-6 w-full md:w-auto">
+                        <div class="bg-crimson/10 border border-crimson/30 rounded-xl px-4 py-3 text-center min-w-[90px]">
+                            <span class="block text-2xl font-black text-crimson-bright font-rock">25 ИЮН</span>
+                            <span class="text-xs text-gray-400 font-bold uppercase">Суббота</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Выпускной Open-Air</h3>
+                            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot text-crimson mr-1"></i> Школьный стадион • 18:00</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between w-full md:w-auto gap-4">
+                        <span class="text-sm text-gray-400">Осталось мест: <strong class="text-white">Вход свободный</strong></span>
+                        <button onclick="buyTicket('Выпускной Open-Air (25 Июня)')" class="bg-crimson hover:bg-crimson-bright text-white px-6 py-3 rounded-xl font-bold transition-all shadow-crimson-glow">
+                            Забронировать
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-gray-900 py-12 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left space-y-2">
+                <a href="#" class="font-rock text-3xl text-white hover:text-crimson transition-colors tracking-wider">
+                    Г.Н.Е.В.
+                </a>
+                <p class="text-xs text-gray-500">© 2026 Рок-группа Г.Н.Е.В. Все права защищены Историком.</p>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex gap-4 text-xl">
+                <a href="#" onclick="alertMsg('Группа ВК: Скоро публикация альбома!')" class="w-10 h-10 rounded-full bg-cardBg hover:bg-crimson text-gray-300 hover:text-white flex items-center justify-center transition-all">
+                    <i class="fa-brands fa-vk"></i>
+                </a>
+                <a href="#" onclick="alertMsg('Telegram канал: Ищи в школьных чатах!')" class="w-10 h-10 rounded-full bg-cardBg hover:bg-crimson text-gray-300 hover:text-white flex items-center justify-center transition-all">
+                    <i class="fa-brands fa-telegram"></i>
+                </a>
+                <a href="#" onclick="alertMsg('YouTube: Скоро клип на гимн класса!')" class="w-10 h-10 rounded-full bg-cardBg hover:bg-crimson text-gray-300 hover:text-white flex items-center justify-center transition-all">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL: MANIFEST -->
+    <div id="manifestModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-crimson/40 rounded-2xl max-w-xl w-full p-6 sm:p-8 space-y-6 relative">
+            <button onclick="closeModal('manifestModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-black text-white font-rock">Манифест Г.Н.Е.В.</h3>
+                <div class="w-16 h-1 bg-crimson rounded-full"></div>
+            </div>
+            <div class="space-y-4 text-sm text-gray-300 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
+                <p>1. **Определение:** Г.Н.Е.В. — это не агрессия. Это страсть к познанию истории, громким басам и взаимовыручке на контрольных.</p>
+                <p>2. **Святость Историка:** Учитель истории обладает правом вето на выбор сет-листа и темп барабанных партий.</p>
+                <p>3. **Единство класса:** На наших концертах нет деления на классных активистов и задние парты. Все равны в слэме.</p>
+                <p>4. **Вечность:** Аббревиатура Г.Н.Е.В. вписана в школьные летописи навсегда.</p>
+            </div>
+            <button onclick="closeModal('manifestModal')" class="w-full bg-crimson hover:bg-crimson-bright text-white py-3 rounded-xl font-bold transition-all">
+                Принять Кодекс
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL: GALLERY -->
+    <div id="galleryModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-crimson/40 rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-6 relative">
+            <button onclick="closeModal('galleryModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-black text-white font-rock">Архивные Фотографии</h3>
+                <div class="w-16 h-1 bg-crimson rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="aspect-video bg-black/60 rounded-xl border border-gray-800 flex items-center justify-center text-gray-500 text-xs p-4 text-center">
+                    <i class="fa-solid fa-camera text-2xl mb-1 block"></i> Репетиция после 6-го урока
+                </div>
+                <div class="aspect-video bg-black/60 rounded-xl border border-gray-800 flex items-center justify-center text-gray-500 text-xs p-4 text-center">
+                    <i class="fa-solid fa-camera text-2xl mb-1 block"></i> Историк одобряет соло
+                </div>
+            </div>
+            <button onclick="closeModal('galleryModal')" class="w-full bg-gray-800 hover:bg-gray-700 text-white py-2.5 rounded-xl font-bold transition-all">
+                Закрыть
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL: LYRICS -->
+    <div id="lyricsModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-crimson/40 rounded-2xl max-w-lg w-full p-6 sm:p-8 space-y-6 relative">
+            <button onclick="closeModal('lyricsModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-black text-white font-rock">Текст Трека: "Звонок для учителя"</h3>
+                <div class="w-16 h-1 bg-crimson rounded-full"></div>
+            </div>
+            <div class="space-y-3 text-sm text-gray-300 font-mono italic leading-relaxed max-h-[50vh] overflow-y-auto pr-2">
+                <p>[Куплет 1]</p>
+                <p>Тишина замерла в кабинете №304,<br>Мы знаем все даты в этом грешном мире.<br>Историк открывает тяжелый журнал,<br>Сегодня Г.Н.Е.В. на сцену вбежал!</p>
+                <p>[Припев]</p>
+                <p>Звонок прозвенел, но мы не уйдём!<br>Мы рок про историю вместе поём!<br>Г-Н-Е-В — этот ритм в сердцах,<br>Победа видна в учительских глазах!</p>
+            </div>
+            <button onclick="closeModal('lyricsModal')" class="w-full bg-crimson hover:bg-crimson-bright text-white py-2.5 rounded-xl font-bold transition-all">
+                Отлично
+            </button>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION / MESSAGE MODAL -->
+    <div id="msgModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-crimson rounded-2xl max-w-sm w-full p-6 text-center space-y-4">
+            <div class="w-12 h-12 bg-crimson/20 rounded-full flex items-center justify-center text-crimson text-2xl mx-auto">
+                <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <p id="msgText" class="text-white text-base font-semibold"></p>
+            <button onclick="closeModal('msgModal')" class="w-full bg-crimson hover:bg-crimson-bright text-white py-2 rounded-xl font-bold">
+                Понятно
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Mobile Accordions Toggle
+        function toggleMobileAccordion(id) {
+            const acc = document.getElementById(id);
+            if (acc.classList.contains('hidden')) {
+                acc.classList.remove('hidden');
+            } else {
+                acc.classList.add('hidden');
+            }
+        }
+
+        // Modal Helpers
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function alertMsg(text) {
+            document.getElementById('msgText').innerText = text;
+            openModal('msgModal');
+        }
+
+        // Ticket Purchase Interactive Logic
+        function buyTicket(ticketName) {
+            alertMsg(`Вы успешно забронировали пропуск: "${ticketName}". Поздравляем, вы в первом ряду Г.Н.Е.В.а!`);
+        }
+    </script>
+</body>
+</html>
